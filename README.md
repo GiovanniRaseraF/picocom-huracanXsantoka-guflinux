@@ -1,4 +1,20 @@
-# picocom
+# picocom huracanXsantoka guflinux
+# Huracan Marine
+- author: Giovanni Rasera
+- email: giovanni.raserafarra@gmail.com
+# Compile it
+'''bash
+source /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/environment-setup-imx6guf-guf-linux-gnueabi &&
+make
+'''
+# huracanXsantoka specific
+- this is a fork that changes the makefile to allow arm-guf-linux-gnueabi-gcc compilation
+# Huracan Marine TODO:
+- add single read and single write on port
+- exit from program with command not with Control-q
+    - conflicts with minicom on host linux
+
+# Thanks to !!
 Minimal dumb-terminal emulator
 
 by Nick Patavalis (npat@efault.net)

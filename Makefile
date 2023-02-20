@@ -1,9 +1,18 @@
 
 VERSION = 3.2a
 
-#CC ?= gcc
 CPPFLAGS += -DVERSION_STR=\"$(VERSION)\"
 CFLAGS += -Wall -g
+
+# HuracanXsantoka specific
+# before use need to execute 
+# source /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/environment-setup-imx6guf-guf-linux-gnueabi
+CC            = arm-guf-linux-gnueabi-gcc  -march=armv7-a -marm  -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9 --sysroot=/opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi
+CXX           = arm-guf-linux-gnueabi-g++  -march=armv7-a -marm  -mthumb-interwork -mfloat-abi=hard -mfpu=neon -mtune=cortex-a9 --sysroot=/opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi
+DEFINES       = -DQT_DEPRECATED_WARNINGS -DSANTOKA -DQT_QML_DEBUG -DQT_DESIGNER_LIB -DQT_UIPLUGIN_LIB -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_XML_LIB -DQT_CORE_LIB
+CFLAGS        = -pipe  -O2 -pipe -g -feliminate-unused-debug-types --sysroot=/opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi -g -DLINUX=1 -DLINUX=1 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+CXXFLAGS      = -pipe  -O2 -pipe -g -feliminate-unused-debug-types --sysroot=/opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi -g -DLINUX=1 -DLINUX=1 -std=gnu++11 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
+#INCPATH       = -I../huracanXsantoka -I. -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5 -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5/QtDesigner -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5/QtUiPlugin -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5/QtWidgets -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5/QtGui -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5/QtXml -isystem /opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/include/qt5/QtCore -I. -I/home/jenkins/workspace/Yocto-Jethro/yocto/releases/GUF-Yocto-jethro-11.309-r8127-0/yocto/build-imx6guf/tmp/sysroots/imx6guf/usr/include/libdrm -I. -I/opt/guf/GUF-Yocto-jethro-11.0-r8139-0-sdk/sysroots/imx6guf-guf-linux-gnueabi/usr/lib/qt5/mkspecs/linux-oe-g++
 
 LD = $(CC)
 LDFLAGS ?= -g
@@ -31,11 +40,11 @@ CPPFLAGS += -DUSE_FLOCK
 #CPPFLAGS += -DUUCP_LOCK_DIR=\"$(UUCP_LOCK_DIR)\"
 
 ## Comment these out to disable "linenoise"-library support
-HISTFILE = .picocom_history
-CPPFLAGS += -DHISTFILE=\"$(HISTFILE)\" \
+#HISTFILE = .picocom_history
+#CPPFLAGS += -DHISTFILE=\"$(HISTFILE)\" \
 	    -DLINENOISE
-OBJS += linenoise-1.0/linenoise.o
-linenoise-1.0/linenoise.o : linenoise-1.0/linenoise.c linenoise-1.0/linenoise.h
+#OBJS += linenoise-1.0/linenoise.o
+#linenoise-1.0/linenoise.o : linenoise-1.0/linenoise.c linenoise-1.0/linenoise.h
 
 ## Comment this in to enable (force) custom baudrate support
 ## even on systems not enabled by default.
